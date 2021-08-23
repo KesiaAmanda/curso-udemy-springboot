@@ -1,29 +1,26 @@
 package com.loja.curso.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.loja.curso.domain.Categoria;
+import com.loja.curso.services.CategoriaService;
 
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaResource {
 	
-	@GetMapping
-	//@RequestMapping(method = RequestMethod.GET)
-	public List<Categoria> listar() {
-		Categoria categoria1 = new Categoria(1, "Informática");
-		Categoria categoria2 = new Categoria(2, "Escritório");
+	@Autowired
+	private CategoriaService categoriaService;
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+		Categoria categoria = categoriaService.findById(id);
 		
-		List<Categoria> categorias = new ArrayList<Categoria>();
-		
-		categorias.add(categoria1);
-		categorias.add(categoria2);
-		
-		return categorias;
+		return ResponseEntity.ok().body(categoria);
 	}
 }
