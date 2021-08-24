@@ -4,9 +4,10 @@ package com.loja.curso.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.loja.curso.domain.Categoria;
+import com.loja.curso.domain.Estado;
+
 
 @Repository
-public interface CategoriaRepository extends JpaRepository<Categoria, Integer>{
+public interface EstadoRepository extends JpaRepository<Estado, Integer>{
 
 }
