@@ -13,6 +13,7 @@ import com.loja.curso.domain.Cidade;
 import com.loja.curso.domain.Cliente;
 import com.loja.curso.domain.Endereco;
 import com.loja.curso.domain.Estado;
+import com.loja.curso.domain.ItemPedido;
 import com.loja.curso.domain.Pagamento;
 import com.loja.curso.domain.PagamentoComBoleto;
 import com.loja.curso.domain.PagamentoComCartão;
@@ -25,6 +26,7 @@ import com.loja.curso.repositories.CidadeRepository;
 import com.loja.curso.repositories.ClienteRepository;
 import com.loja.curso.repositories.EnderecoRepository;
 import com.loja.curso.repositories.EstadoRepository;
+import com.loja.curso.repositories.ItemPedidoRepository;
 import com.loja.curso.repositories.PagamentoRepository;
 import com.loja.curso.repositories.PedidoRepository;
 import com.loja.curso.repositories.ProdutoRepository;
@@ -47,6 +49,8 @@ public class CursomcApplication implements CommandLineRunner{
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -112,6 +116,17 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		pagamentoRepository.saveAll(Arrays.asList(pagamento1, pagamento2));
 		
+		ItemPedido itemPedido1 = new ItemPedido(pedido1, produto1, 0.00, 1, 2000.00);
+		ItemPedido itemPedido2 = new ItemPedido(pedido1, produto3, 0.00, 2, 80.00);
+		ItemPedido itemPedido3 = new ItemPedido(pedido2, produto2, 100.00, 1, 800.00);
 		
+		pedido1.getItemPedidos().addAll(Arrays.asList(itemPedido1, itemPedido2));
+		pedido2.getItemPedidos().addAll(Arrays.asList(itemPedido3));
+		
+		produto1.getItemPedidos().addAll(Arrays.asList(itemPedido1));
+		produto2.getItemPedidos().addAll(Arrays.asList(itemPedido3));
+		produto3.getItemPedidos().addAll(Arrays.asList(itemPedido2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3));
 	}
 }
