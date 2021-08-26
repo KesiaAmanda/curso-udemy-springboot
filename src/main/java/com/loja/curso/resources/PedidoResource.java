@@ -21,7 +21,7 @@ public class PedidoResource {
 	private PedidoService pedidoService;
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable Integer id) throws ObjectNotFoundException {
+	public ResponseEntity<Pedido> find(@PathVariable Integer id) throws ObjectNotFoundException {
 		Pedido pedido = pedidoService.findById(id);
 		
 		return ResponseEntity.ok().body(pedido);

@@ -21,7 +21,7 @@ public class ClienteResource {
 	private ClienteService clienteService;
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable Integer id) throws ObjectNotFoundException {
+	public ResponseEntity<Cliente> find(@PathVariable Integer id) throws ObjectNotFoundException {
 		Cliente cliente = clienteService.findById(id);
 		
 		return ResponseEntity.ok().body(cliente);
