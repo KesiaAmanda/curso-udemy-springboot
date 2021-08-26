@@ -2,6 +2,8 @@ package com.loja.curso.resources;
 
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.loja.curso.domain.Categoria;
+import com.loja.curso.dto.CategoriaDTO;
 import com.loja.curso.services.CategoriaService;
 
 
@@ -23,7 +26,6 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService categoriaService;
 	
-//	@GetMapping("/{id}")
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 		Categoria categoria = categoriaService.findById(id);
@@ -31,7 +33,14 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(categoria);
 	}
 	
-//	@PostMapping
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<CategoriaDTO>> findAll() {
+		List<Categoria> categoria = categoriaService.findAll();
+		List<CategoriaDTO> categoriaDTOs = categoria.stream().map(obg -> new CategoriaDTO(obg)).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(categoriaDTOs);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Categoria categoria) {
 		Categoria categoriaSalva = categoriaService.insert(categoria);
