@@ -22,7 +22,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.loja.curso.domain.Cliente;
 import com.loja.curso.dto.ClienteDTO;
 import com.loja.curso.services.ClienteService;
-import com.loja.curso.services.exception.ObjectNotFoundException;
 
 
 @RestController

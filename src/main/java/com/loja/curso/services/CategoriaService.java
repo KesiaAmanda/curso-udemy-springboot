@@ -33,8 +33,9 @@ public class CategoriaService {
 		return categoriaRepository.save(categoria);
 	}
 	
-	public Categoria update(Categoria categoria) {
-		findById(categoria.getId());
+	public Categoria update(Categoria categoriaAtualizada) {
+		Categoria categoria = findById(categoriaAtualizada.getId());
+		updateData(categoria, categoriaAtualizada);
 		return categoriaRepository.save(categoria);
 	}
 
@@ -60,6 +61,11 @@ public class CategoriaService {
 	public Categoria fromDTO(CategoriaDTO categoriaDTO) {
 		return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
 	}
+
+	private void updateData(Categoria categoria, Categoria categoriaAtualizada) {
+		categoria.setNome(categoriaAtualizada.getNome());
+	}
+	
 }
 
 
