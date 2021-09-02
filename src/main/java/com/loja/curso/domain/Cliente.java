@@ -41,7 +41,7 @@ public class Cliente implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
-	private List<Pedido> produto = new ArrayList<>();
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Cliente() {
 	}
@@ -112,11 +112,11 @@ public class Cliente implements Serializable{
 	}
 
 	public List<Pedido> getPedidos() {
-		return produto;
+		return pedidos;
 	}
 
-	public void setPedidos(List<Pedido> produto) {
-		this.produto = produto;
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	@Override
