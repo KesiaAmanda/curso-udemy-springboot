@@ -52,7 +52,7 @@ public class CategoriaResource {
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
 		Page<Categoria> categoria = categoriaService.findPage(page, linesPerPage, direction, orderBy);
-		Page<CategoriaDTO> categoriaDTOs = categoria.map(obg -> new CategoriaDTO(obg));
+		Page<CategoriaDTO> categoriaDTOs = categoria.map(obj -> new CategoriaDTO(obj));
 		
 		return ResponseEntity.ok().body(categoriaDTOs);
 	}

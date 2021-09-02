@@ -23,10 +23,10 @@ public class ItemPedido implements Serializable{
 	public ItemPedido() {
 	}
 
-	public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
+	public ItemPedido(Pedido pedido, Produto p, Double desconto, Integer quantidade, Double preco) {
 		super();
 		id.setPedido(pedido);
-		id.setProduto(produto);
+		id.setProduto(p);
 		this.desconto = desconto;
 		this.quantidade = quantidade;
 		this.preco = preco;

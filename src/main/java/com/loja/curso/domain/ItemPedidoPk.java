@@ -16,8 +16,8 @@ public class ItemPedidoPk implements Serializable{
 	private Pedido pedido;
 	
 	@ManyToOne
-	@JoinColumn(name = "produto_id")
-	private Produto produto;
+	@JoinColumn(name = "p_id")
+	private Produto p;
 	
 	public Pedido getPedido() {
 		return pedido;
@@ -26,14 +26,14 @@ public class ItemPedidoPk implements Serializable{
 		this.pedido = pedido;
 	}
 	public Produto getProduto() {
-		return produto;
+		return p;
 	}
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setProduto(Produto p) {
+		this.p = p;
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(pedido, produto);
+		return Objects.hash(pedido, p);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -44,7 +44,7 @@ public class ItemPedidoPk implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		ItemPedidoPk other = (ItemPedidoPk) obj;
-		return Objects.equals(pedido, other.pedido) && Objects.equals(produto, other.produto);
+		return Objects.equals(pedido, other.pedido) && Objects.equals(p, other.p);
 	}
 	
 }

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,21 +25,19 @@ public class Produto implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column
 	private String nome;
-	@Column
 	private Double preco;
 	
 	@ManyToMany
 	@JsonIgnore
 	@JoinTable(name="PRODUTO_CATEGORIA",
-		joinColumns = @JoinColumn(name = "produto_id"),
+		joinColumns = @JoinColumn(name = "p_id"),
 		inverseJoinColumns = @JoinColumn(name = "categoria_id")
 	)
 	private List<Categoria> categorias = new ArrayList<>();
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "id.produto")
+	@OneToMany(mappedBy = "id.p")
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	public Produto () {
@@ -97,11 +94,11 @@ public class Produto implements Serializable{
 	
 	@JsonIgnore
 	public List<Pedido> getPedidos() {
-		List<Pedido> pedidos = new ArrayList<>();
+		List<Pedido> produto = new ArrayList<>();
 		for(ItemPedido itemPedido : itens) {
-			pedidos.add(itemPedido.getPedido());
+			produto.add(itemPedido.getPedido());
 		}
-		return pedidos;
+		return produto;
 	}
 
 	@Override
