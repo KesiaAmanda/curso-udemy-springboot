@@ -16,7 +16,7 @@ import com.loja.curso.domain.Estado;
 import com.loja.curso.domain.ItemPedido;
 import com.loja.curso.domain.Pagamento;
 import com.loja.curso.domain.PagamentoComBoleto;
-import com.loja.curso.domain.PagamentoComCartão;
+import com.loja.curso.domain.PagamentoComCartao;
 import com.loja.curso.domain.Pedido;
 import com.loja.curso.domain.Produto;
 import com.loja.curso.domain.enums.EstadoPagamento;
@@ -131,7 +131,7 @@ public class CursomcApplication implements CommandLineRunner{
 		Pedido pedido1 = new Pedido(null, dateFormat.parse("30/09/2021 10:31"), cliente, endereco1);
 		Pedido pedido2 = new Pedido(null, dateFormat.parse("10/10/2021 19:35"), cliente, endereco2);
 		
-		Pagamento pagamento1 = new PagamentoComCartão(null, EstadoPagamento.QUITADO, pedido1, 6);
+		Pagamento pagamento1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, pedido1, 6);
 		pedido1.setPagamento(pagamento1);
 		
 		Pagamento pagamento2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, pedido2, dateFormat.parse("20/10/2021 00:00"), null);
