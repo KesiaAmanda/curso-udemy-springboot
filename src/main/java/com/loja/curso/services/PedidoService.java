@@ -70,7 +70,7 @@ public class PedidoService {
 		
 		itemPedidoRepository.saveAll(pedido.getItemPedidos());
 		
-		emailService.sendOrderConfirmationEmail(pedido);
+		emailService.sendOrderConfirmationHtmlEmail(pedido);
 		
 		return pedido;
 	}
