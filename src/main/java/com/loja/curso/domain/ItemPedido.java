@@ -1,6 +1,8 @@
 package com.loja.curso.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
@@ -101,5 +103,22 @@ public class ItemPedido implements Serializable{
 		ItemPedido other = (ItemPedido) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	@Override
+	public String toString() {
+		NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduto().getNome());
+		builder.append(", Qtd: ");
+		builder.append(getQuantidade());
+		builder.append(", Preço unitário: ");
+		builder.append(format.format(getPreco()));
+		builder.append(", Subtotal: ");
+		builder.append(format.format(getSubtotal()));
+		builder.append("\n");
+		return builder.toString();
+	}
+	
+	
 	
 }
