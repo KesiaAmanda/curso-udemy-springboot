@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.loja.curso.domain.Categoria;
 import com.loja.curso.domain.Pedido;
-import com.loja.curso.dto.CategoriaDTO;
 import com.loja.curso.services.PedidoService;
 import com.loja.curso.services.exception.ObjectNotFoundException;
 
