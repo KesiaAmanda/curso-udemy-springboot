@@ -17,11 +17,14 @@ import org.springframework.stereotype.Service;
 import com.loja.curso.domain.Cidade;
 import com.loja.curso.domain.Cliente;
 import com.loja.curso.domain.Endereco;
+import com.loja.curso.domain.enums.Perfil;
 import com.loja.curso.domain.enums.TipoCliente;
 import com.loja.curso.dto.ClienteDTO;
 import com.loja.curso.dto.ClienteNewDTO;
 import com.loja.curso.repositories.ClienteRepository;
 import com.loja.curso.repositories.EnderecoRepository;
+import com.loja.curso.security.UserSS;
+import com.loja.curso.services.exception.AuthorizationException;
 import com.loja.curso.services.exception.DataIntegrityException;
 import com.loja.curso.services.exception.ObjectNotFoundException;
 
@@ -39,6 +42,11 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 	
 	public Cliente findById(Integer id) throws ObjectNotFoundException {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Cliente> optional = clienteRepository.findById(id);
 		return optional.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id:"+ id +" Tipo: "+Cliente.class.getName()));
 	}
