@@ -13,6 +13,7 @@ import org.thymeleaf.context.Context;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import com.loja.curso.domain.Cliente;
 import com.loja.curso.domain.Pedido;
 
 
@@ -69,5 +70,21 @@ public abstract class AbstractEmailService implements EmailService {
 		helper.setSentDate(new Date(System.currentTimeMillis()));
 		helper.setText(htmlFromTemplatePedido(pedido), true);
 		return message;
+	}
+	
+	@Override
+	public void sendNewPasswordEmail(Cliente cliente, String newPass) {
+		SimpleMailMessage simpleMailMessage = prepareNewPasswordEmail(cliente, newPass);
+		sendEmail(simpleMailMessage);
+	}
+
+	protected SimpleMailMessage prepareNewPasswordEmail(Cliente cliente, String newPass) {
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		mailMessage.setTo(cliente.getEmail());
+		mailMessage.setFrom(sender);
+		mailMessage.setSubject("Solicitação de nova senha");
+		mailMessage.setSentDate(new Date(System.currentTimeMillis()));
+		mailMessage.setText("Nova senha: " + newPass);
+		return mailMessage;
 	}
 }
