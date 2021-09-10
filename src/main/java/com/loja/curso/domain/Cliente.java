@@ -52,9 +52,7 @@ public class Cliente implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
-	
-	private String url;
-	
+		
 	public Cliente() {
 		addPerfil(Perfil.CLIENTE);
 	}
@@ -68,14 +66,6 @@ public class Cliente implements Serializable{
 		this.tipoCliente = (tipoCliente==null) ? null : tipoCliente.getCod();
 		this.senha = senha;
 		addPerfil(Perfil.CLIENTE);
-	}
-	
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 
 	public Integer getId() {
